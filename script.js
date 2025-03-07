@@ -1,5 +1,6 @@
 
 
+
 function getComputerChoice() {
     let compChoice = Math.floor(Math.random() * 3);
     let choice;
