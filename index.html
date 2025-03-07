@@ -4,10 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Game</title>
+    <link rel="icon" href="Images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+
 </head>
 
 <body>
+    <h1>Rock Paper, Scissors?</h1>
+    <div class="container">
+
+        <div class="card">
+            <h2 class="title">User</h2>
+            <div class="btn-container">
+                <button onClick="playGame(this.id)" id="rock"><img src="Images/rock.jpg" alt=""></button>
+                <button onClick="playGame(this.id)" id="paper"><img src="Images/paper.jpg" alt=""></button>
+                <button onClick="playGame(this.id)" id="scissor"><img src="Images/scissor.jpg" alt=""></button>
+            </div>
+        </div>
+        <div class="card">
+            <h2 class="title">Computer</h2>
+            <div class="btn-container">
+                <button id="c-rock"><img src="Images/rock.jpg" alt=""></button>
+                <button id="c-paper"><img src="Images/paper.jpg" alt=""></button>
+                <button id="c-scissor"><img src="Images/scissor.jpg" alt=""></button>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+    <table id="scoreTable">
+        <thead>
+            <tr>
+                <th>Round</th>
+                <th>User Choice</th>
+                <th>Computer Choice</th>
+                <th>Result</th>
+                <th id="userScore">User Score</th>
+                <th id="computerScore">Computer Score</th>
+                <th>Winner</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+            <tr>
+                <th colspan="6">Final Winner</th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+
     <script src="script.js">
     </script>
 </body>

@@ -1,3 +1,5 @@
+
+
 function getComputerChoice() {
     let compChoice = Math.floor(Math.random() * 3);
     let choice;
@@ -16,41 +18,81 @@ function getComputerChoice() {
 
 let humanScore = 0;
 let computerScore = 0;
+let roundCount = 0;
 
-function playGame() {
+function playGame(humanChoice) {
+
     let computerChoice = getComputerChoice();
-     let humanChoice = prompt("Enter your choice (rock, paper, scissor): ");
+    
+    highlightComputerChoice(computerChoice);
+    let table = document.getElementById('scoreTable').querySelector('tbody');
 
-     console.log(`computer choice is ${computerChoice}`);
-     console.log(`Your choice is ${humanChoice}`);
-
+    let resultMessage = "";
+    let winner = "";
     if (computerChoice === 'rock' && humanChoice === 'scissor' || computerChoice === 'scissor' && humanChoice === 'paper' || computerChoice === 'paper' && humanChoice === 'rock') {
-        console.log(`${computerChoice} beats ${humanChoice}`);
+        resultMessage=`${computerChoice} beats ${humanChoice}`;
         computerScore++;
     }
     else if (humanChoice === 'rock' && computerChoice === 'scissor' || humanChoice === 'scissor' && computerChoice === 'paper' || humanChoice === 'paper' && computerChoice === 'rock') {
-        console.log(`${humanChoice} beats ${computerChoice}`);
+        resultMessage=`${humanChoice} beats ${computerChoice}`;
         humanScore++;
     }
     else if(humanChoice===computerChoice){
-        console.log("It's a tie");
+        resultMessage="It's a tie";
     }
-    console.log(`Your score : ${humanScore}`);
-    console.log(`Computer Score : ${computerScore}`);
-    
+    if (roundCount === 0) { 
+        document.getElementById("scoreTable").style.display = "table"; 
+    }
+
+    if(humanScore>computerScore){
+        winner = "User";
+    }
+    else if(computerScore>humanScore){
+        winner="Computer";
+    }
+    else{
+        winner="Tie";
+    }
+
+    roundCount++;
+    let newRow = `<tr>
+    <td>${roundCount}</td>
+    <td>${humanChoice}</td>
+    <td>${computerChoice}</td>
+    <td>${resultMessage}</td>
+    <td>${humanScore}</td>
+    <td>${computerScore}</td>
+    <td>${winner}</td>
+    </tr>`;
+
+    table.innerHTML += newRow;
+    if (humanScore >= 5 || computerScore >= 5) {
+        setTimeout(() => {
+            alert(`Game Over! ${winner} wins.`);
+
+            
+            let finalRow = document.querySelector("tfoot tr th:last-child");
+            if (finalRow) {
+                finalRow.innerText = winner;
+            }
+        }, 100); 
+    }
 }
 
-for(let i=1; i<=5; i++){
-    console.log(`Round ${i} : `);
-    playGame();
+function highlightComputerChoice(choice){
+    document.querySelectorAll('.btn-container button').forEach(button =>{
+        button.classList.remove('highlight');
+ } );
+
+ let selectedButton = document.getElementById(`c-${choice}`);
+ if (selectedButton) {
+    selectedButton.classList.add("highlight");
+}
 }
 
-if(humanScore>computerScore){
-    console.log(`You have won with score of ${humanScore}`);
-}
-else if(computerScore>humanScore){
-    console.log(`Computer has won with score of ${computerScore}`);
-}
-else{
-    console.log(`It's a tie with score of ${humanScore}`);
-}
+
+
+
+
+
+
